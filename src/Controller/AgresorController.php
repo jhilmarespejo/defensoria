@@ -49,16 +49,24 @@ class AgresorController extends AppController
     public function add()
     {
         $agresor = $this->Agresor->newEntity();
-        if ($this->request->is('post')) {
-            $agresor = $this->Agresor->patchEntity($agresor, $this->request->getData());
-            if ($this->Agresor->save($agresor)) {
-                $this->Flash->success(__('The agresor has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The agresor could not be saved. Please, try again.'));
-        }
         $this->set(compact('agresor'));
+
+
+
+        if ($this->request->is('post')) {
+            $agresor = $this->Agresor->patchEntity($agresor, $this->request->data['agresor']);
+           
+            if ($this->Agresor->save($agresor)) {
+                $this->Flash->success(__('Dato guardado correctamente'));
+
+               $this->render('/Victima/add');
+            
+            } else{
+               
+                $this->Flash->error(__('ERROR A GUARDAR EL DATO'));
+            }
+            
+        }
     }
 
     /**

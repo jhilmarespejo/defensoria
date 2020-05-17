@@ -28,7 +28,7 @@
                 <!-- FORMULARIO VICTIMA-->
                 <div class="carousel-item active"> 
                     <!-- <?= $this->Form->create($victima) ?> -->
-                    <?php echo $this->Form->create('', ['url'=>['controller' => 'victima', 'action'=>'add'], 'id'=>'save-victima'] ); ?>
+                    <?php echo $this->Form->create('', ['url'=>['controller' => 'victima', 'action'=>'add'], 'id'=>'frm-victima'] ); ?>
                     <fieldset>
                         <legend ><h2 class="txt-shadow"><?= __('Nuevo Registro de Víctima') ?></h2></legend>
                         <hr>
@@ -132,7 +132,7 @@
                         <?php       ?>
                     </fieldset>
                     <div class="text-center">
-                        <?= $this->Form->button(__('GUARDAR'), ['class' => 'btn btn-warning btn-primary btn-lg']) ?>
+                        <?= $this->Form->button(__('GUARDAR'), ['class' => 'btn btn-warning btn-primary btn-lg', 'id'=>'save-victima']) ?>
                     </div>
                     <?= $this->Form->end() ?>
                 </div> 
@@ -140,11 +140,10 @@
 
                 <!-- FORMULARIO AGRESOR-->
                 <div class="carousel-item denuncia form">
-                    <?= $this->Form->create($agresor); ?>
+                    <?php echo $this->Form->create('', ['url'=>['controller' => 'agresor', 'action'=>'add'], 'id'=>'frm-agresor'] ); ?>
                     <fieldset>
                         <legend ><h2 class="txt-shadow"><?= __('Nuevo Registro de Agresor/a') ?></h2></legend>
                         <hr>
-
 
                         <div class="row">
                             <div class="col-6 form-group">
@@ -162,25 +161,25 @@
                         </div>
                         <div class="form-group">
                             <label class="txt-shadow">NOMBRES</label>
-                            <?php echo $this->Form->input('agresor.nombres', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                            <?php echo $this->Form->input('agresor.nombres', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                         </div>
                         <div class="form-group">
                             <label class="txt-shadow">APELLIDO MATERNO</label>
-                            <?php echo $this->Form->input('agresor.ap_paterno', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                            <?php echo $this->Form->input('agresor.ap_paterno', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                         </div>
                         <div class="form-group">
                             <label class="txt-shadow">APELLIDO PATERNO</label>
-                            <?php echo $this->Form->input('agresor.ap_materno', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                            <?php echo $this->Form->input('agresor.ap_materno', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                         </div>
                         <!-- <div class="form-group">
                             <label class="txt-shadow">APELLIDO DE CASADA</label>
-                            <?php echo $this->Form->input('agresor.ap_casada', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                            <?php echo $this->Form->input('agresor.ap_casada', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                         </div>
 
 
                         <div class="form-group">
                             <label class="txt-shadow">FECHA DE NACIMIENTO</label>
-                            <?php echo $this->Form->input('agresor.fecha_nacimento', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                            <?php echo $this->Form->input('agresor.fecha_nacimento', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                         </div>
                         <div class="row">
                             <div class="col-6 form-group">
@@ -196,7 +195,7 @@
                         </div>
                         <div class="form-group">
                             <label class="txt-shadow">LUGAR DE NACIMIENTO</label>
-                            <?php echo $this->Form->input('agresor.lugar_nacimiento', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                            <?php echo $this->Form->input('agresor.lugar_nacimiento', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                         </div>
 
                         <div class="form-group">
@@ -207,32 +206,32 @@
 
                         <div class="form-group">
                             <label class="txt-shadow">CELULAR</label>
-                            <?php echo $this->Form->input('agresor.celular', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                            <?php echo $this->Form->input('agresor.celular', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"8"] );?>
                         </div>
 
                         <div class="form-group">
                             <label class="txt-shadow">ESTADO CIVIL</label>
-                            <?php echo $this->Form->input('agresor.estado_civil', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                            <?php echo $this->Form->input('agresor.estado_civil', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                         </div>
                         <div class="form-group">
                             <label class="txt-shadow">GRADO DE INSTRUCCIÓN</label>
-                            <?php echo $this->Form->input('agresor.instrucción', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                            <?php echo $this->Form->input('agresor.instrucción', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                         </div>
                         <div class="form-group">
                             <label class="txt-shadow">OCUPACIÓN</label>
-                            <?php echo $this->Form->input('agresor.ocupacion', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                            <?php echo $this->Form->input('agresor.ocupacion', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                         </div>
                         <div class="form-group">
                             <label class="txt-shadow">RESIDENCIA HABITUAL</label>
-                            <?php echo $this->Form->input('agresor.residencia_habitual', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                            <?php echo $this->Form->input('agresor.residencia_habitual', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                         </div>
                         <div class="form-group">
                             <label class="txt-shadow">MUNICIPIO</label>
-                            <?php echo $this->Form->input('agresor.municipio', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                            <?php echo $this->Form->input('agresor.municipio', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                         </div>
                         <div class="form-group">
                             <label class="txt-shadow">DIRECCIÓN</label>
-                            <?php echo $this->Form->input('agresor.direccion', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                            <?php echo $this->Form->input('agresor.direccion', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                         </div>
                         <div class="form-group">
                             <label class="txt-shadow">DISTRITO</label>
@@ -245,7 +244,7 @@
                         </div> -->
                     </fieldset>
                     <div class="text-center">
-                        <?= $this->Form->button(__('GUARDAR'), ['class' => 'btn btn-warning btn-primary btn-lg']) ?>
+                        <?= $this->Form->button(__('GUARDAR'), ['class' => 'btn btn-warning btn-primary btn-lg', 'id'=>'save-agresor']) ?>
                     </div>
                     <?= $this->Form->end() ?>
                 </div>
@@ -261,63 +260,63 @@
                     <hr>
                     <div class="form-group">
                         <label class="txt-shadow">victima_id</label>
-                        <?php echo $this->Form->input('victima_id', ['options' => $victima_id], ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                        <?php echo $this->Form->input('victima_id', ['options' => $victima_id], ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                     </div>
                     <div class="form-group">
                         <label class="txt-shadow">agresor_id</label>
-                        <?php echo $this->Form->input('agresor_id', ['options' => $agresor_id], ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                        <?php echo $this->Form->input('agresor_id', ['options' => $agresor_id], ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                     </div>
                     <div class="form-group">
                         <label class="txt-shadow">FECHA DE ATENCIÓNN</label>
-                        <?php echo $this->Form->input('fecha_atencion', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                        <?php echo $this->Form->input('fecha_atencion', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                     </div>
                     <div class="form-group">
                         <label class="txt-shadow">FORMA DE ACCESO AL SERVICION</label>
-                        <?php echo $this->Form->input('forma_ingreso_servicio', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                        <?php echo $this->Form->input('forma_ingreso_servicio', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                     </div>
                     <div class="form-group">
                         <label class="txt-shadow">TIPOLOGÍA</label>
-                        <?php echo $this->Form->input('tipologia', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                        <?php echo $this->Form->input('tipologia', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                     </div>
                     <div class="form-group">
                         <label class="txt-shadow">TIPO DE AGRESION</label>
-                        <?php echo $this->Form->input('agresion', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                        <?php echo $this->Form->input('agresion', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                     </div>
                     <div class="form-group">
                         <label class="txt-shadow">TESTIMONIO DEL DENUNCIANTE</label>
-                        <?php echo $this->Form->input('testimonio_denunciante', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                        <?php echo $this->Form->input('testimonio_denunciante', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                     </div>
                     <div class="form-group">
                         <label class="txt-shadow">DESCRIPCIÓN DE LA DENUNCIA</label>
-                        <?php echo $this->Form->input('descripcion_denuncia', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                        <?php echo $this->Form->input('descripcion_denuncia', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                     </div>
                     <div class="form-group">
                         <label class="txt-shadow">PARENTESCO CON EL AGRESOR</label>
-                        <?php echo $this->Form->input('parentesco_agresor', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                        <?php echo $this->Form->input('parentesco_agresor', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                     </div>
                     <div class="form-group">
                         <label class="txt-shadow">ACCIONES INMEDIATAS</label>
-                        <?php echo $this->Form->input('acciones_inmediatas', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                        <?php echo $this->Form->input('acciones_inmediatas', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                     </div>
                     <div class="form-group">
                         <label class="txt-shadow">ACCIONES COORDINADAS</label>
-                        <?php echo $this->Form->input('acciones_coordinadas', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                        <?php echo $this->Form->input('acciones_coordinadas', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                     </div>
                     <div class="form-group">
                         <label class="txt-shadow">FECHA DE RESULTADO</label>
-                        <?php echo $this->Form->input('fecha_resultado', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                        <?php echo $this->Form->input('fecha_resultado', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                     </div>
                     <div class="form-group">
                         <label class="txt-shadow">RESULTADOS OBTENIDOS</label>
-                        <?php echo $this->Form->input('resultados_obtenidos', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                        <?php echo $this->Form->input('resultados_obtenidos', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                     </div>
                     <div class="form-group">
                         <label class="txt-shadow">CANTIDAD PAGINAS ADJUNTAS</label>
-                        <?php echo $this->Form->input('num_paginas_adjuntas', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                        <?php echo $this->Form->input('num_paginas_adjuntas', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"3"] );?>
                     </div>
                     <div class="form-group">
                         <label class="txt-shadow">NOMBRE DEL FUNCIONARIO A CARGO DE LA ACCIÓN</label>
-                        <?php echo $this->Form->input('nombre_funcionario_accion', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false, 'maxlength'=>"2", "max"=>"14", "min"=>'1'] );?>
+                        <?php echo $this->Form->input('nombre_funcionario_accion', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                     </div>
                 </fieldset>
                 <div class="text-center">
@@ -345,12 +344,12 @@
         interval: false
     })
     jQuery(document).ready(function($) {
-    $('select#id-cim').change(function(event) {
+    $('#save-victima').change(function(event) {
             var data = [$(this).val()];
 
             $.ajax({
                 type: "POST",
-                url: $('form#save-victima').attr('action'),
+                url: $('form#frm-victima').attr('action'),
                 data: {data},
                 beforeSend: function( data )
                 {
@@ -360,11 +359,33 @@
                 {
                     $('.success').removeClass('hidden')
                     $('#loading').addClass('hidden')
-                    $('#save-victima').html(data);
+                    //$('#save-victima').html(data);
                 },
             });
             return false;
         });
+
+    $('#save-agresor').change(function(event) {
+            var data = [$(this).val()];
+
+            $.ajax({
+                type: "POST",
+                url: $('form#frm-agresor').attr('action'),
+                data: {data},
+                beforeSend: function( data )
+                {
+                    $('.success').removeClass('hidden')                    
+                },
+                success:  function( data )
+                {
+                    $('.success').removeClass('hidden')
+                    $('#loading').addClass('hidden')
+                    //$('#save-victima').html(data);
+                },
+            });
+            return false;
+        });
+
     });
 
 </script>

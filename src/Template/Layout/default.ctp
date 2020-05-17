@@ -49,7 +49,7 @@ $cakeDescription ='.:Defensoria - GAMEA:.';
                 <hr>
                 <ul class="">
                     <li><?= $this->Html->link(__('List Victima'), ['action' => 'index']) ?></li>
-                    <li><?= $this->Html->link(__('List Denuncia'), ['controller' => 'Denuncia', 'action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('Registro de victima'), ['controller' => 'Victima', 'action' => 'add']) ?></li>
                     <li><?= $this->Html->link(__('Nueva Denuncia'), ['controller' => 'Denuncia', 'action' => 'add']) ?></li>
                     <li><?= $this->Html->link(__('Nuevo Agresor'), ['controller' => 'Agresor', 'action' => 'add']) ?></li>
 

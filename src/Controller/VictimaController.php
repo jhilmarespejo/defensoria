@@ -52,6 +52,7 @@ class VictimaController extends AppController
 
         $this->loadModel('Agresor');
         $agresor = $this->Agresor->newEntity();
+        
         $this->loadModel('Denuncia');
         $denuncium = $this->Denuncia->newEntity();
         $victima_id = $this->Denuncia->Victima->find('list', ['limit' => 200]);
