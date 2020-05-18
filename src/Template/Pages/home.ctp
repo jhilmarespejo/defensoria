@@ -30,14 +30,30 @@ endif;
 $cakeDescription = '.:Defensoria - GAMEA:.';
 ?>
  <style type="text/css">
-   .home {
-        background: url(webroot/css/bootstrap/background3.jpg) no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
+    body, html {
+  height: 100%;
 }
+   .bg {
+       /* background: url(webroot/css/bootstrap/background3.jpg) no-repeat center center fixed;*/
+         background-image: url(webroot/css/bootstrap/background3.jpg);
+        /* The image used */
+      /* Full height */
+      height: 100%; 
 
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+}
+@media only screen and (min-width: 0px) and (max-width: 500px) {
+  .bg {
+    background: url('webroot/css/bootstrap/background3-sm.jpg') 50% 80% no-repeat fixed !important;
+    background-size: auto !important;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+}
  </style>
 <!DOCTYPE html>
 <html>
@@ -56,14 +72,14 @@ $cakeDescription = '.:Defensoria - GAMEA:.';
 </head>
 <body class="home">
 
+        <div class="bg"></div>
 
 
-<div class="row">
-    <div class="columns large-12 text-center">
-        <!-- <h3 class="board">INICIO</h3> -->
-    </div>
-    <hr/>
-</div>
-
+    
+<script src="//code.tidio.co/kkna3lizmtzdsb07xpfcjior3ndv7mxb.js" async></script>
 </body>
 </html>
+
+
+  
+    
