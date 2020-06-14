@@ -59,7 +59,7 @@
                             <label class="txt-shadow">APELLIDO MATERNO</label>
                             <?php echo $this->Form->input('ap_materno', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                         </div>
-                        <!-- <div class="form-group">
+                        <div class="form-group">
                             <label class="txt-shadow">APELLIDO DE CASADA</label>
                             <?php echo $this->Form->input('ap_casada', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                         </div>
@@ -128,7 +128,7 @@
                             <label class="txt-shadow">IDIOMA</label>
                             <?php $options = [[ 'text' => '', 'value' => '', 'selected', 'disabled'],[ 'text' => 'ESPAÑOL', 'value' => 'ESPAÑOL'],[ 'text' => 'AYMARA', 'value' => 'AYMARA'],[ 'text' => 'QUECHUA', 'value' => 'QUECHUA']]; ?>
                             <?php echo $this->Form->select('idioma',$options, ['label' => false, 'class'=>'form-control', 'placeholder' => '', 'required' => false] );?>
-                        </div> -->
+                        </div> 
                         <?php       ?>
                     </fieldset>
                     <div class="text-center">
@@ -171,7 +171,7 @@
                             <label class="txt-shadow">APELLIDO PATERNO</label>
                             <?php echo $this->Form->input('agresor.ap_materno', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                         </div>
-                        <!-- <div class="form-group">
+                        <div class="form-group">
                             <label class="txt-shadow">APELLIDO DE CASADA</label>
                             <?php echo $this->Form->input('agresor.ap_casada', ['label' => false, 'class'=>'form-control', 'type' => 'text', 'placeholder' => '', 'required' => false] );?>
                         </div>
@@ -241,7 +241,7 @@
                             <label class="txt-shadow">IDIOMA</label>
                             <?php $options = [[ 'text' => '', 'value' => '', 'selected', 'disabled'],[ 'text' => 'ESPAÑOL', 'value' => 'ESPAÑOL'],[ 'text' => 'AYMARA', 'value' => 'AYMARA'],[ 'text' => 'QUECHUA', 'value' => 'QUECHUA']]; ?>
                             <?php echo $this->Form->select('agresor.idioma',$options, ['label' => false, 'class'=>'form-control', 'placeholder' => '', 'required' => false] );?>
-                        </div> -->
+                        </div>
                     </fieldset>
                     <div class="text-center">
                         <?= $this->Form->button(__('GUARDAR'), ['class' => 'btn btn-warning btn-primary btn-lg', 'id'=>'save-agresor']) ?>

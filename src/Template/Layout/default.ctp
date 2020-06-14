@@ -47,12 +47,11 @@ $cakeDescription ='.:Defensoria - GAMEA:.';
              <div class="board col-xs-3 col-sm-3 col-md-3 col-lg-3 " style="height: max-content;">
                 <fieldset> <legend ><h2 class="txt-shadow"><?= __('MENÚ') ?></h2></legend></fieldset>
                 <hr>
-                <ul class="">
+                <ul class="">sss
                     <li><?= $this->Html->link(__('List Victima'), ['action' => 'index']) ?></li>
                     <li><?= $this->Html->link(__('Registro de victima'), ['controller' => 'Victima', 'action' => 'add']) ?></li>
                     <li><?= $this->Html->link(__('Nueva Denuncia'), ['controller' => 'Denuncia', 'action' => 'add']) ?></li>
                     <li><?= $this->Html->link(__('Nuevo Agresor'), ['controller' => 'Agresor', 'action' => 'add']) ?></li>
-
                 </ul>
                 <p>
                     <?= $this->Flash->render() ?>

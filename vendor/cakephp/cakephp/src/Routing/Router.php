@@ -204,6 +204,7 @@ class Router
      */
     public static function connect($route, $defaults = [], $options = [])
     {
+        exit("xxx");
         static::$initialized = true;
         static::scope('/', function ($routes) use ($route, $defaults, $options) {
             $routes->connect($route, $defaults, $options);
