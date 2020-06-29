@@ -6,7 +6,7 @@
 // pr($agresor);
 ?>
 
-<!-- <div class="board row"> -->
+<!-- <div class="board row"> 
 
    <!--  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 ">
         <fieldset> <legend ><h2 class="txt-shadow"><?= __('MENÚ') ?></h2></legend></fieldset>
@@ -254,7 +254,7 @@
                 <!-- FORMULARIO DENUNCIA-->
                 <div class="carousel-item denuncia form">
                     
-                <?= $this->Form->create($denuncium) ?>
+                <?= $this->Form->create($denuncia) ?>
                 <fieldset>
                     <legend ><h2 class="txt-shadow"><?= __('Nuevo Registro de Denuncia') ?></h2></legend>
                     <hr>

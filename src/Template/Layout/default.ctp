@@ -31,8 +31,6 @@ $cakeDescription ='.:Defensoria - GAMEA:.';
         echo $this->Html->css('bootstrap/bootstrap.css'); 
         echo $this->Html->script('jquery.min.js');
         echo $this->Html->script('bootstrap/bootstrap.min.js');
-        
-        
     ?>
 
     <?= $this->fetch('meta') ?>
@@ -44,26 +42,32 @@ $cakeDescription ='.:Defensoria - GAMEA:.';
     
     <div class="container clearfix">
         <div class=" row">
+                <!--  -->
+            <?php if( isset($current_user) ): ?>
              <div class="board col-xs-3 col-sm-3 col-md-3 col-lg-3 " style="height: max-content;">
+                <legend class="text-center btn btn-danger"><h5 class="txt-shadow"> Bienvenido usuario:<br/><?php echo $current_user['names']. ' ' . $current_user['surnames']; ?></h5></legend>
                 <fieldset> <legend ><h2 class="txt-shadow"><?= __('MENÚ') ?></h2></legend></fieldset>
                 <hr>
-                <ul class="">sss
-                    <li><?= $this->Html->link(__('List Victima'), ['action' => 'index']) ?></li>
-                    <li><?= $this->Html->link(__('Registro de victima'), ['controller' => 'Victima', 'action' => 'add']) ?></li>
-                    <li><?= $this->Html->link(__('Nueva Denuncia'), ['controller' => 'Denuncia', 'action' => 'add']) ?></li>
-                    <li><?= $this->Html->link(__('Nuevo Agresor'), ['controller' => 'Agresor', 'action' => 'add']) ?></li>
+                <ul class="">
+                    <li><?= $this->Html->link(__('Lista de víctimas'), ['controller' => 'Victima','action' => 'index']) ?></li>
+                    <li><?= $this->Html->link(__('Nueva Denuncia'), ['controller' => 'Victima', 'action' => 'add']) ?></li>
+                    <li><?= $this->Html->link(__('Mensajes pendientes'), ['controller' => 'Chat', 'action' => 'operador']) ?></li>
+                    <li><?= $this->Html->link(__('Salir'), ['controller' => 'Users', 'action' => 'logout']) ?></li>
                 </ul>
-                <p>
+                <span class="btn">
                     <?= $this->Flash->render() ?>
-                </p>
+                </span>
             </div>
+            <?php endif; ?>
             <div class="col-xs-05 col-sm-05 col-md-05 col-lg-05 ">
             </div>
             <div class="board col-xs-8 col-sm-8 col-md-8 col-lg-8">
                 <?= $this->fetch('content') ?>
             </div>    
+
         </div>
     </div>
+
     <footer>
     </footer>
 </body>

@@ -722,7 +722,7 @@ class RouteBuilder
      * @throws \BadMethodCallException
      */
     public function connect($route, $defaults = [], array $options = [])
-    {exit('ss');
+    {
         $defaults = $this->parseDefaults($defaults);
         if (!isset($options['action']) && !isset($defaults['action'])) {
             $defaults['action'] = 'index';

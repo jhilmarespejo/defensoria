@@ -21,7 +21,8 @@ use Cake\Network\Exception\NotFoundException;
 
 $this->layout = false;
 
-if (Configure::read('debug')) :
+/* JE: add ! and debug false to use home in production*/ 
+if (!Configure::read('debug')) :
     throw new NotFoundException(
         'Please replace src/Template/Pages/home.ctp with your own version or re-enable debug mode.');
 endif;
@@ -31,29 +32,25 @@ $cakeDescription = '.:Defensoría - GAMEA:.';
 ?>
  <style type="text/css">
     body, html {
-  height: 100%;
-}
-   .bg {
-       /* background: url(webroot/css/bootstrap/background3.jpg) no-repeat center center fixed;*/
-         background-image: url(webroot/css/bootstrap/background3.jpg);
-        /* The image used */
-      /* Full height */
-      height: 100%; 
+  height: 100%;}
 
-      /* Center and scale the image nicely */
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-}
+body, html {
+    height: 100%;
+    background-repeat: no-repeat;
+    background: url(webroot/css/bootstrap/background3.jpg) no-repeat center center fixed;
+    background-size: 100% 100%; }
+
 @media only screen and (min-width: 0px) and (max-width: 500px) {
-  .bg {
+  body {
     background: url('webroot/css/bootstrap/background3-sm.jpg') 50% 80% no-repeat fixed !important;
     background-size: auto !important;
     -webkit-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
-  }
-}
+    background-size: cover;   }
+  .lgbt, .slimdna{
+    width: 50%;
+    height: auto; }
+
  </style>
 <!DOCTYPE html>
 <html>
@@ -65,18 +62,22 @@ $cakeDescription = '.:Defensoría - GAMEA:.';
     </title>
 
     <?= $this->Html->meta('icon') ?>
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('style.css') ?>
-    <?= $this->Html->css('home.css') ?>
+    <?= $this->Html->css('bootstrap/bootstrap.css') ?>
+   
     <link href="https://fonts.googleapis.com/css?family=Raleway:500i|Roboto:300,400,700|Roboto+Mono" rel="stylesheet">
 </head>
 <body class="home">
-
-        <div class="bg"></div>
-
-
+     <div class="foot">    
+    <div class="float-right "><span class="h3 txt-shadow-black">SELECCIONE UNA OPCIÓN:   </span></div>
+    <br/><br/><br/>
     
-<script src="//code.tidio.co/kkna3lizmtzdsb07xpfcjior3ndv7mxb.js" async></script>
+    <div class="option"><?php echo $this->Html->image('SlimDna.png', ['alt' => 'SlimDNa', 'class' => 'slimdna float-right', 'url' => ['controller' => 'Chat', 'slimdna'] ]);?></div>
+    <div class="option"><?php echo $this->Html->image('LGBT.png', ['alt' => 'TLGB', 'class' => 'lgbt float-right', 'url' => ['controller' => 'Chat', 'lgbt'] ]);?></div>
+    </div>
+
+
+
+
 </body>
 </html>
 
