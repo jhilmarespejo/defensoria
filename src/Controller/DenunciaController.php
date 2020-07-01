@@ -53,16 +53,15 @@ class DenunciaController extends AppController
     {
         $denuncium = $this->Denuncia->newEntity();
         if ($this->request->is('post')) {
-            $denuncium = $this->Denuncia->patchEntity($denuncium, $this->request->getData());
+            $denuncium = $this->Denuncia->patchEntity($denuncium, $this->request->data);
             if ($this->Denuncia->save($denuncium)) {
-                $this->Flash->success(__('The denuncium has been saved.'));
+                $this->Flash->success(__('La denuncia se registró con éxito'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The denuncium could not be saved. Please, try again.'));
+            $this->Flash->error(__('Error al registrar los datos'));
         }
-        $victima = $this->Denuncia->Victima->find('list', ['limit' => 200]);
-        $agresor = $this->Denuncia->Agresor->find('list', ['limit' => 200]);
+        
         $this->set(compact('denuncium', 'victima', 'agresor'));
     }
 
@@ -75,22 +74,30 @@ class DenunciaController extends AppController
      */
     public function edit($id = null)
     {
-        $denuncium = $this->Denuncia->get($id, [
-            'contain' => []
-        ]);
+        $denuncium = $this->Denuncia->get($id, ['contain' => [] ]);
+        
         if ($this->request->is(['patch', 'post', 'put'])) {
             $denuncium = $this->Denuncia->patchEntity($denuncium, $this->request->getData());
             if ($this->Denuncia->save($denuncium)) {
-                $this->Flash->success(__('The denuncium has been saved.'));
+                $this->Flash->success(__('Dato modificado correctamente'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The denuncium could not be saved. Please, try again.'));
+            $this->Flash->error(__('Error al guardar los cambios'));
         }
-        $victima = $this->Denuncia->Victima->find('list', ['limit' => 200]);
-        $agresor = $this->Denuncia->Agresor->find('list', ['limit' => 200]);
-        $this->set(compact('denuncium', 'victima', 'agresor'));
+        
+        // $victima = $this->Denuncia->Victima->find('list', ['limit' => 200] );
+        // $agresor = $this->Denuncia->Agresor->find('list', ['limit' => 200])->toArray();
+        // $this->set(compact('denuncium', 'victima', 'agresor'));
+
+
+        $denuncium = $this->Denuncia->get($id, [
+            'contain' => ['Victima', 'Agresor']
+        ]);
+
+        $this->set('denuncium', $denuncium);
     }
+
 
     /**
      * Delete method
@@ -99,16 +106,16 @@ class DenunciaController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $denuncium = $this->Denuncia->get($id);
-        if ($this->Denuncia->delete($denuncium)) {
-            $this->Flash->success(__('The denuncium has been deleted.'));
-        } else {
-            $this->Flash->error(__('The denuncium could not be deleted. Please, try again.'));
-        }
+    // public function delete($id = null)
+    // {
+    //     $this->request->allowMethod(['post', 'delete']);
+    //     $denuncium = $this->Denuncia->get($id);
+    //     if ($this->Denuncia->delete($denuncium)) {
+    //         $this->Flash->success(__('The denuncium has been deleted.'));
+    //     } else {
+    //         $this->Flash->error(__('The denuncium could not be deleted. Please, try again.'));
+    //     }
 
-        return $this->redirect(['action' => 'index']);
-    }
+    //     return $this->redirect(['action' => 'index']);
+    // }
 }

@@ -23,9 +23,13 @@ class ChatController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
-    public function index($destino)
+    public function index($plataforma)
     {
-        $this->set('destino', $destino);
+        if (isset($plataforma)) {
+            $this->set('plataforma', $plataforma);
+        } else {
+            $this->redirect('/');
+        }
     }
 
     public function operador()

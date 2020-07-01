@@ -50,35 +50,33 @@ class VictimaController extends AppController
     {
         $victima = $this->Victima->newEntity();
 
-        $this->loadModel('Agresor');
-        $agresor = $this->Agresor->newEntity();
+        // $this->loadModel('Agresor');
+        // $agresor = $this->Agresor->newEntity();
         
-        $this->loadModel('Denuncia');
+        // $this->loadModel('Denuncia');
         
-        $denuncium = $this->Denuncia->newEntity();
-        $victima_id = $this->Denuncia->Victima->find('list', ['limit' => 200]);
-        $agresor_id = $this->Denuncia->Agresor->find('list', ['limit' => 200]);
-        $this->set(compact('victima', 'agresor', 'denuncium', 'victima_id', 'agresor_id'));
+        // $denuncium = $this->Denuncia->newEntity();
+        // $victima_id = $this->Denuncia->Victima->find('list', ['limit' => 200]);
+        // $agresor_id = $this->Denuncia->Agresor->find('list', ['limit' => 200]);
+        // $this->set(compact('victima', 'agresor', 'denuncium', 'victima_id', 'agresor_id'));
 
         if ($this->request->is('post')) {
-            //pr($this->request); exit;
 
-            $victima = $this->Victima->patchEntity($victima, $this->request->getData());
+            $victima = $this->Victima->patchEntity($victima, $this->request->data);
             if ($this->Victima->save($victima)) {
-                $this->Flash->success(__('DATO GUARDADO CORRECTAMENTE'));
+                //$this->Flash->success(__('Datos guardados con éxito'));
+               
+                //JE: Verificar cual es la condicion adecuada para obtener el ID de la victima en esta consulta, nobre
 
                 //$this->viewBuilder()->layout(false);
-                // $this->set(['ninos'=>$datosnino]);
-                $this->render('/Victima/add');
-            
-                //return $this->redirect(['action' => 'add']);
+                $this->set(['msg'=>'Datos guardados con éxito', 'id'=>$victima->id, 'notification'=>'alert-success'] );
+                $this->render('/Victima/notification');
             } else{
-                $this->Flash->error(__('ERROR A GUARDAR EL DATO'));
+                $this->set(['msg'=>'Hubo un problema al guardar los datos', 'id'=>'', 'notification'=>'alert-danger'] );
+                 $this->render('/Victima/notification');
             }
 
         }
-        // $this->set(compact('victima'));
-       //exit('xxxxxxxxxxxxxxxxx');
     }
 
     /**

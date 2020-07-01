@@ -51,19 +51,18 @@ class AgresorController extends AppController
         $agresor = $this->Agresor->newEntity();
         $this->set(compact('agresor'));
 
-
-
         if ($this->request->is('post')) {
             $agresor = $this->Agresor->patchEntity($agresor, $this->request->data['agresor']);
-           
+           //pr($this->request->data);exit;
             if ($this->Agresor->save($agresor)) {
-                $this->Flash->success(__('Dato guardado correctamente'));
+                
+                $this->set(['msg'=>'Datos guardados con éxito', 'id'=>$agresor->id, 'notification'=>'alert-success'] );
+                $this->render('/Victima/notification');
 
-               $this->render('/Victima/add');
-            
+
             } else{
-               
-                $this->Flash->error(__('ERROR A GUARDAR EL DATO'));
+                $this->set(['msg'=>'Hubo un problema al guardar los datos', 'id'=>'', 'notification'=>'alert-danger'] );
+                 $this->render('/Victima/notification');
             }
             
         }

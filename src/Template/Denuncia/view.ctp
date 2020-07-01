@@ -4,29 +4,22 @@
  * @var \App\Model\Entity\Denuncium $denuncium
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Denuncium'), ['action' => 'edit', $denuncium->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Denuncium'), ['action' => 'delete', $denuncium->id], ['confirm' => __('Are you sure you want to delete # {0}?', $denuncium->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Denuncia'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Denuncium'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Victima'), ['controller' => 'Victima', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Victima'), ['controller' => 'Victima', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Agresor'), ['controller' => 'Agresor', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Agresor'), ['controller' => 'Agresor', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
+
 <div class="denuncia view large-9 medium-8 columns content">
-    <h3><?= h($denuncium->id) ?></h3>
-    <table class="vertical-table">
+    <h3 class="text-center">DETALLE DE LA DENUNCIA</h3>
+    <table class="vertical-table table-bordered table-hover table responsive">
+
+        <tr>
+            <th scope="row"><?= __('Número de caso') ?></th>
+            <td><?= h($denuncium->id)?></td>
+        </tr>
         <tr>
             <th scope="row"><?= __('Victima') ?></th>
-            <td><?= $denuncium->has('victima') ? $this->Html->link($denuncium->victima->id, ['controller' => 'Victima', 'action' => 'view', $denuncium->victima->id]) : '' ?></td>
+            <td><?= $denuncium->has('victima') ? $this->Html->link($denuncium->victima->nombres.' '.$denuncium->victima->ap_paterno.' '.$denuncium->victima->ap_materno, ['controller' => 'Victima', 'action' => 'view', $denuncium->victima->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Agresor') ?></th>
-            <td><?= $denuncium->has('agresor') ? $this->Html->link($denuncium->agresor->id, ['controller' => 'Agresor', 'action' => 'view', $denuncium->agresor->id]) : '' ?></td>
+            <td><?= $denuncium->has('agresor') ? $this->Html->link($denuncium->agresor->nombres.' '.$denuncium->agresor->ap_paterno.' '.$denuncium->agresor->ap_materno, ['controller' => 'Agresor', 'action' => 'view', $denuncium->agresor->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Fecha Atencion') ?></th>
@@ -72,17 +65,17 @@
             <th scope="row"><?= __('Resultados Obtenidos') ?></th>
             <td><?= h($denuncium->resultados_obtenidos) ?></td>
         </tr>
-        <tr>
+        <!-- <tr>
             <th scope="row"><?= __('Num Paginas Adjuntas') ?></th>
-            <td><?= h($denuncium->num_paginas_adjuntas) ?></td>
+            <td><?//= h($denuncium->num_paginas_adjuntas) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Nombre Funcionario Accion') ?></th>
-            <td><?= h($denuncium->nombre_funcionario_accion) ?></td>
-        </tr>
-        <tr>
+            <td><?//= h($denuncium->nombre_funcionario_accion) ?></td>
+        </tr> -->
+        <!-- <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($denuncium->id) ?></td>
-        </tr>
+        </tr> -->
     </table>
 </div>

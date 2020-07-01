@@ -3,64 +3,47 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Denuncium[]|\Cake\Collection\CollectionInterface $denuncia
  */
+
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Denuncium'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Victima'), ['controller' => 'Victima', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Victima'), ['controller' => 'Victima', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Agresor'), ['controller' => 'Agresor', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Agresor'), ['controller' => 'Agresor', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
+
 <div class="denuncia index large-9 medium-8 columns content">
-    <h3><?= __('Denuncia') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
+    <h3 class="text-center"><?= __('Denuncias') ?></h3><hr>
+    <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered table-responsive table-hover">
+        <thead class="thead-light">
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('victima_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('agresor_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Número de caso') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('fecha_atencion') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Víctima') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Agresor') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('forma_ingreso_servicio') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('tipologia') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('agresion') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('testimonio_denunciante') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('descripcion_denuncia') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('parentesco_agresor') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('acciones_inmediatas') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('acciones_coordinadas') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('fecha_resultado') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('resultados_obtenidos') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('num_paginas_adjuntas') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('nombre_funcionario_accion') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                
+                <th scope="col" class="actions"><?= __('Acciones:') ?></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($denuncia as $denuncium): ?>
             <tr>
-                <td><?= $this->Number->format($denuncium->id) ?></td>
-                <td><?= $denuncium->has('victima') ? $this->Html->link($denuncium->victima->id, ['controller' => 'Victima', 'action' => 'view', $denuncium->victima->id]) : '' ?></td>
-                <td><?= $denuncium->has('agresor') ? $this->Html->link($denuncium->agresor->id, ['controller' => 'Agresor', 'action' => 'view', $denuncium->agresor->id]) : '' ?></td>
+                <td><?= h($denuncium->id) ?></td>
                 <td><?= h($denuncium->fecha_atencion) ?></td>
+                <td><?= h($denuncium['victima']->nombres.' '.$denuncium['victima']->ap_paterno.' '.$denuncium['victima']->ap_materno) ?></td>
+                <td><?= h($denuncium['agresor']->nombres.' '.$denuncium['agresor']->ap_paterno.' '.$denuncium['agresor']->ap_materno) ?></td>
                 <td><?= h($denuncium->forma_ingreso_servicio) ?></td>
                 <td><?= h($denuncium->tipologia) ?></td>
                 <td><?= h($denuncium->agresion) ?></td>
                 <td><?= h($denuncium->testimonio_denunciante) ?></td>
                 <td><?= h($denuncium->descripcion_denuncia) ?></td>
                 <td><?= h($denuncium->parentesco_agresor) ?></td>
-                <td><?= h($denuncium->acciones_inmediatas) ?></td>
-                <td><?= h($denuncium->acciones_coordinadas) ?></td>
-                <td><?= h($denuncium->fecha_resultado) ?></td>
-                <td><?= h($denuncium->resultados_obtenidos) ?></td>
-                <td><?= h($denuncium->num_paginas_adjuntas) ?></td>
-                <td><?= h($denuncium->nombre_funcionario_accion) ?></td>
+                
+                
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $denuncium->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $denuncium->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $denuncium->id], ['confirm' => __('Are you sure you want to delete # {0}?', $denuncium->id)]) ?>
+                    <?= $this->Html->link(__('Ver'),['action' => 'view', $denuncium->id],['class'=>'btn btn-primary btn-sm', 'id' => 'btn-view']); 
+                    echo $this->Html->link(__('Editar'),['action' => 'edit', $denuncium->id],['class'=>'btn btn-info btn-sm', 'id' => 'btn-edit']) ?>
+                  <!--   <?//= $this->Form->postLink(__('Delete'), ['action' => 'delete', $denuncium->id], ['confirm' => __('Are you sure you want to delete # {0}?', $denuncium->id)]) ?> -->
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -68,12 +51,28 @@
     </table>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->first('<< ' . __('Inicio')) ?>
+            <?= $this->Paginator->prev('< ' . __('Anterior')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <?= $this->Paginator->next(__('Siguiente') . ' >') ?>
+            <?= $this->Paginator->last(__('Último') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+        <p class="alert alert-warning"><?= $this->Paginator->counter(['format' => __('Página {{page}} de {{pages}}, mostrando {{current}} dato(s) de {{count}} en total')]) ?></p>
+    </div>
+</div>
+<script type="text/javascript">
+     $('#btn-view, #btn-edit').click(function() {
+        $('#processing').modal('show');
+        $('div#loading').removeClass('invisible'); 
+    })
+    
+ </script>
+
+   <div class="modal fade" data-backdrop="static" id="processing">
+    <div class="modal-dialog">
+        <div class="text-center modal-content">
+            <span><strong>Procesando...</strong></span><br>
+            <?php echo $this->Html->image('loading.gif');?>
+        </div>
     </div>
 </div>

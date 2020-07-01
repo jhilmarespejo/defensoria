@@ -33,6 +33,7 @@ class MensajesController extends AppController
         $this->request->data['mensajes']['de']= $this->request->data['denunciante_id'];
         $this->request->data['mensajes']['para']= $this->request->data['distrito'];
         $this->request->data['mensajes']['mensaje']= $this->request->data['mensaje'];
+        $this->request->data['mensajes']['plataforma']= $this->request->data['plataforma'];
 
         //exit;
         $mensaje = $this->Mensajes->patchEntity($mensaje, $this->request->data['mensajes']);

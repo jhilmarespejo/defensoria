@@ -3,45 +3,81 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Denuncium $denuncium
  */
+
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $denuncium->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $denuncium->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Denuncia'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Victima'), ['controller' => 'Victima', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Victima'), ['controller' => 'Victima', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Agresor'), ['controller' => 'Agresor', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Agresor'), ['controller' => 'Agresor', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="denuncia form large-9 medium-8 columns content">
-    <?= $this->Form->create($denuncium) ?>
+
+<div class="denuncia form large-9 medium-8 columns content table">
+    <?= $this->Form->create($denuncium, ['id' => 'denuncium-form']) ?>
     <fieldset>
-        <legend><?= __('Edit Denuncium') ?></legend>
-        <?php
-            echo $this->Form->control('victima_id', ['options' => $victima]);
-            echo $this->Form->control('agresor_id', ['options' => $agresor]);
-            echo $this->Form->control('fecha_atencion');
-            echo $this->Form->control('forma_ingreso_servicio');
-            echo $this->Form->control('tipologia');
-            echo $this->Form->control('agresion');
-            echo $this->Form->control('testimonio_denunciante');
-            echo $this->Form->control('descripcion_denuncia');
-            echo $this->Form->control('parentesco_agresor');
-            echo $this->Form->control('acciones_inmediatas');
-            echo $this->Form->control('acciones_coordinadas');
-            echo $this->Form->control('fecha_resultado');
-            echo $this->Form->control('resultados_obtenidos');
-            echo $this->Form->control('num_paginas_adjuntas');
-            echo $this->Form->control('nombre_funcionario_accion');
-        ?>
+        <legend class="text-center"><?= __('Edicion de datos de la denuncia') ?></legend>
+        <hr/>
+        <div class="form-group"> 
+            <?= $this->form->control('x.casoid',['label'=>'Agresor', 'value'=>$denuncium->id, 'class' => 'form-control', 'disabled'=>true]); ?>
+        </div>
+        <div class="form-group"> 
+            <?php   echo $this->Form->hidden('victima_id', ['value'=>$denuncium->victima->id, 'id'=>'victima_id']); 
+                    echo $this->Form->hidden('agresor_id', ['value'=>$denuncium->agresor->id, 'id'=>'agresor_id']);?>
+            
+            <?= $denuncium->has('victima') ? $this->Form->control('x.victima', ['label'=>'Víctima', 'value'=>$denuncium->victima->nombres.' '.$denuncium->victima->ap_paterno.' '.$denuncium->victima->ap_materno, 'class' => 'form-control', 'disabled'=>true]) : '' ?>
+        </div>
+        <div class="form-group"> 
+            <?= $denuncium->has('agresor') ? $this->form->control('x.agresor',['label'=>'Agresor', 'value'=>$denuncium->agresor->nombres.' '.$denuncium->agresor->ap_paterno.' '.$denuncium->agresor->ap_materno, 'class' => 'form-control', 'disabled'=>true]) : '' ?>
+        </div>
+        <div class="form-group"> 
+            <?php echo $this->Form->control('fecha_atencion', ['class' => 'form-control']); ?> 
+        </div>
+        <div class="form-group"> 
+            <?php echo $this->Form->control('forma_ingreso_servicio', ['class' => 'form-control']); ?> 
+        </div>
+        <div class="form-group"> 
+            <?php echo $this->Form->control('tipologia', ['class' => 'form-control']); ?> 
+        </div>
+        <div class="form-group"> 
+            <?php echo $this->Form->control('agresion', ['class' => 'form-control']); ?> 
+        </div>
+        <div class="form-group"> 
+            <?php echo $this->Form->control('testimonio_denunciante', ['class' => 'form-control']); ?> 
+        </div>
+        <div class="form-group"> 
+            <?php echo $this->Form->control('descripcion_denuncia', ['class' => 'form-control']); ?> 
+        </div>
+        <div class="form-group"> 
+            <?php echo $this->Form->control('parentesco_agresor', ['class' => 'form-control']); ?> 
+        </div>
+        <div class="form-group"> 
+            <?php echo $this->Form->control('acciones_inmediatas', ['class' => 'form-control']); ?> 
+        </div>
+        <div class="form-group"> 
+            <?php echo $this->Form->control('acciones_coordinadas', ['class' => 'form-control']); ?> 
+        </div>
+        <div class="form-group"> 
+            <?php echo $this->Form->control('fecha_resultado', ['class' => 'form-control']); ?> 
+        </div>
+        <div class="form-group"> 
+            <?php echo $this->Form->control('resultados_obtenidos', ['class' => 'form-control']); ?> 
+        </div>
+        <!-- <div class="form-group"> 
+            <?//php echo $this->Form->control('num_paginas_adjuntas', ['class' => 'form-control']); ?> 
+        </div>
+        <div class="form-group"> 
+            <?//php echo $this->Form->control('nombre_funcionario_accion', ['class' => 'form-control']); ?> 
+        </div> -->
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Guardar'),['class' => 'btn btn-warning btn-primary btn-lg']) ?>
     <?= $this->Form->end() ?>
+</div>
+ <script type="text/javascript">
+     $('#denuncium-form').submit(function() {
+        $('#processing').modal('show');
+        $('div#loading').removeClass('invisible'); 
+    })
+ </script>
+
+   <div class="modal fade" data-backdrop="static" id="processing">
+    <div class="modal-dialog">
+        <div class="text-center modal-content">
+            <span><strong>Procesando...</strong></span><br>
+            <?php echo $this->Html->image('loading.gif');?>
+        </div>
+    </div>
 </div>

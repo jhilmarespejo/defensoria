@@ -71,7 +71,8 @@ body, html {
     <div class="float-right "><span class="h3 txt-shadow-black">SELECCIONE UNA OPCIÓN:   </span></div>
     <br/><br/><br/>
     
-    <div class="option"><?php echo $this->Html->image('SlimDna.png', ['alt' => 'SlimDNa', 'class' => 'slimdna float-right', 'url' => ['controller' => 'Chat', 'slimdna'] ]);?></div>
+    <div class="option"><?php echo $this->Html->image('slim.png', ['alt' => 'SlimDNa', 'class' => 'slimdna float-right', 'url' => ['controller' => 'Chat', 'slim'] ]);?></div>
+     <div class="option"><?php echo $this->Html->image('dna.png', ['alt' => 'SlimDNa', 'class' => 'slimdna float-right', 'url' => ['controller' => 'Chat', 'dna'] ]);?></div>
     <div class="option"><?php echo $this->Html->image('LGBT.png', ['alt' => 'TLGB', 'class' => 'lgbt float-right', 'url' => ['controller' => 'Chat', 'lgbt'] ]);?></div>
     </div>
 
