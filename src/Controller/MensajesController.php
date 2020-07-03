@@ -16,44 +16,53 @@ class MensajesController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);   
-        $this->Auth->allow(['add']);
+        $this->Auth->allow(['add', 'msgs']);
+        if (in_array($this->request->getParam('action'), ['add', 'msgs'])){
+            $this->getEventManager()->off($this->Csrf);
+        }
     }
+
+
     /**
      * add method
      * receive the id_denunciante, nombre, distrito and message from caht/index 
      * @return \Cake\Http\Response|void
      */
     public function add(){
-    $mensaje = $this->Mensajes->newEntity();
+        $mensaje = $this->Mensajes->newEntity();
 
-    if ($this->request->is('post')) {
-        //pr($this->request->data);
-        //exit;
-        $this->request->data['mensajes']['nombres']= $this->request->data['nombres'];
-        $this->request->data['mensajes']['de']= $this->request->data['denunciante_id'];
-        $this->request->data['mensajes']['para']= $this->request->data['distrito'];
-        $this->request->data['mensajes']['mensaje']= $this->request->data['mensaje'];
-        $this->request->data['mensajes']['plataforma']= $this->request->data['plataforma'];
+        if ($this->request->is('post')) {
 
-        //exit;
-        $mensaje = $this->Mensajes->patchEntity($mensaje, $this->request->data['mensajes']);
-       
-        if ($this->Mensajes->save($mensaje)) {
-
-            $mensajes=$this->Mensajes->find('all', ['conditions' => ['de'=>$this->request->data['mensajes']['de'], 'nombres'=> $this->request->data['mensajes']['nombres'] ]])->toArray();
-
+            $mensaje = $this->Mensajes->patchEntity($mensaje, $this->request->data);
            
+            if ($this->Mensajes->save($mensaje)) {
 
-            $this->set('mensajes', $mensajes);
-            $this->render('/Mensajes/index');
-            //exit;
-          //$denunciante_id=$this->Mensajes->find('list', ['conditions' => ['distrito'=>$this->request->data['distrito'], 'nombres'=>$this->request->data['nombres']]])->first();
-            //pr($denunciante_id);
-            //$this->set('denunciante_id', $denunciante_id);
-        
-        } 
+                return $this->redirect(['controller' => 'Chat', 'action' => 'mensajes', $this->request->data['canal'] ] );
+
+                // $mensajes = $this->Mensajes->find( 'all' )->where('canal' => $this->request->data['para'] ] ])->toArray();
+                // $this->set('mensajes', $mensajes);
+                // $this->render('/Chat/chatbox');
+            
+            } 
+        }
     }
-  }
+
+//request for poolAjax
+    public function msgs($canal =null){
+        if($canal){
+            $mensaje = $this->Mensajes->newEntity();
+
+            $mensajes = $this->Mensajes->find( 'all' )->where(['canal' => $canal])->toArray();
+            $this->set('mensajes', $mensajes);
+            $this->layout = false;
+            $this->render('/Chat/chatbox');
+
+        }else{
+            exit;
+        }
+    }
+
+
 
 
 }

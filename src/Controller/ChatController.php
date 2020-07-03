@@ -16,8 +16,14 @@ class ChatController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);   
-        $this->Auth->allow(['index']);
+        $this->Auth->allow(['index', 'mensajes']);
+
+
+        if (in_array($this->request->getParam('action'), ['mensajes', 'operador'])){
+            $this->getEventManager()->off($this->Csrf);
+        }
     }
+
     /**
      * Index method
      *
@@ -31,29 +37,32 @@ class ChatController extends AppController
             $this->redirect('/');
         }
     }
-
+/* deliver list of users online */
     public function operador()
     {
-
         $distrito = 'Distrito '.$this->Auth->user('district');
-        //pr();exit;
-
-
-        //$Query = $UsersTable->find('all');
-
-        // $Query->select([ 
-        //       'userlevel_id',
-        //       'count' => $Query->func()->count('*')
-        //     ])
-        // ->where(['account_id' => $AccountID])
-        // ->group('userlevel_id');
-
-
 
         $this->LoadModel('Mensajes');
-        $mensajes=$this->Mensajes->find('all', ['conditions' => ['para'=> $distrito ]] )->toArray();
+        //$mensajes=$this->Mensajes->find('all', ['conditions' => ['para'=> $distrito ]] )-->toArray();
+        $denunciantes = $this->Mensajes->find()->select(['de', 'nombres','fechahora'])->where(['para' => $distrito])->group(['de'])->toArray();
+            $this->set('denunciantes', $denunciantes);
+    }
+
+
+/*deliver messages from each user to operador*/
+    public function mensajes($canal=null){
+
+        if($canal){
+
+        $this->LoadModel('Mensajes');
+        
+        $mensajes = $this->Mensajes->find( 'all' )->where(['canal' => $canal])->toArray();
 
             $this->set('mensajes', $mensajes);
+            $this->render('/Chat/chatbox');
+
+        } else {exit;}
+
     }
 
 

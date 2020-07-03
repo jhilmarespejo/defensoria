@@ -3,6 +3,8 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
+use Cake\Core\Configure;
 
 /**
  * Victima Controller
@@ -33,13 +35,28 @@ class DenuncianteController extends AppController
 
     if ($this->request->is('post')) {
         $denunciante = $this->Denunciante->patchEntity($denunciante, $this->request->data);
-       
+        
         if ($this->Denunciante->save($denunciante)) {
+            
+            $this->set(['denunciante_id'=>$denunciante->id, 'nombres'=>$this->request->data['nombres'],'distrito'=>$this->request->data['distrito'], 'plataforma'=>$this->request->data['plataforma'] ]);
+            
+            /* a welcome message is generated */
+            $mensajesTable = TableRegistry::get('Mensajes');
+            $mensaje = $mensajesTable->newEntity();
+             
+            //pr($this->request->data);exit();
+            session_start();
+            $_SESSION["nombres"] = $mensaje->nombres = $this->request->data['nombres'] ;
+            $_SESSION["para"] = $mensaje->de = 'Distrito '.$this->request->data['distrito'] ;
+            $_SESSION["de"] = $mensaje->para = $denunciante->id ;
+            $mensaje->mensaje = 'Bien venido '.$this->request->data['nombres'].'. ¿En que podemos ayudarle?' ;
+            $_SESSION["plataforma"] = $mensaje->plataforma = $this->request->data['plataforma'] ;     
+            $_SESSION["canal"] = $mensaje->canal = $denunciante->id ;
+            if ($mensajesTable->save($mensaje)) {
+                
+                return $this->redirect(['controller' => 'Chat', 'action' => 'mensajes', $denunciante->id]);
+            }    
 
-          $denunciante_id=$this->Denunciante->find('list', ['conditions' => ['distrito'=>$this->request->data['distrito'], 'nombres'=>$this->request->data['nombres']]])->first();
-            //pr($denunciante_id);
-            $this->set('denunciante_id', $denunciante_id);
-            $this->render('/Denunciante/index');
         
         } 
     }

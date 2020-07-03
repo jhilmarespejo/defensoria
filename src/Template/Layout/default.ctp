@@ -12,7 +12,6 @@
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-
 $cakeDescription ='.:Defensoria - GAMEA:.';
 ?>
 <!DOCTYPE html>
@@ -45,7 +44,9 @@ $cakeDescription ='.:Defensoria - GAMEA:.';
                 <!--  -->
             <?php if( isset($current_user) ): ?>
              <div class="board col-xs-3 col-sm-3 col-md-3 col-lg-3 " style="height: max-content;">
-                <legend class="text-center btn btn-danger"><h5 class="txt-shadow"> Bienvenido usuario:<br/><?php echo $current_user['names']. ' ' . $current_user['surnames']; ?></h5></legend>
+                <legend class="text-center btn btn-danger"><h5 class="txt-shadow"> Bienvenido usuario:<br/><?php echo $current_user['names']. ' ' . $current_user['surnames']; ?></h5>
+                    <h6><?php echo ($current_user['plataforma']=='lgbt')? strtoupper($current_user['plataforma']) : strtoupper($current_user['plataforma']).' - Distrito: '.$current_user['district'];?></h6>
+                </legend>
                 <fieldset> <legend ><h2 class="txt-shadow"><?= __('MENÚ') ?></h2></legend></fieldset>
                 <hr>
                 <ul id="menu" >
