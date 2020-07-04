@@ -36,6 +36,13 @@
 
         <div id="mesgs" class="mesgs"> </div>
 
+        <div class="type_msg mesgs" id='box'>
+          <div class="input_msg_write">
+            <?php echo $this->Form->input('mensaje', ['label' => false,'id'=>'msj-mensaje', 'class'=>'write_msg', 'placeholder'=>'Escriba el mensaje', 'type' => 'text', 'value'=>'']);?>
+            <?php echo $this->Html->image('plane.png', ['alt' => '', 'id'=>'btn-mensaje', 'class' => 'plane msg_send_btn', 'url' => ['' => 'Chat', ''] ]);?>
+          </div> 
+        </div>
+
 
       </div>
 </div>
@@ -69,6 +76,73 @@
           });
           return false;
         });
+
+
+  var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
+  $('#btn-mensaje').on("click",function(event){
+          event.preventDefault();
+          var mensaje = {
+            nombres: $('#msj-nombres').val(),
+            de: $('#msj-de').val(),
+            para: $('#msj-para').val(),
+            mensaje: $('#msj-mensaje').val(),
+            plataforma: $('#msj-plataforma').val(),
+            canal: $('#msj-canal').val(),
+          };
+
+          $.ajax({
+            type: "post",
+            url: "/defensoria/Mensajes/add",
+            data: mensaje,
+            headers: {'X-CSRF-Token': csrfToken},
+            beforeSend: function( data )
+            {
+              $('#btn-mensaje').prop( "disabled", true );
+              $('div#loading').removeClass('invisible');
+              if($('#msj-mensaje').val()==''){
+                $('#msj-mensaje').addClass('is-invalid');
+                $('div#loading').addClass('invisible');
+                return false;
+              }else{
+                $('#msj-mensaje').removeClass('is-invalid');
+              }
+            },
+            success:  function( data )
+            {
+              $('#btn-mensaje').prop( "disabled", false );
+              $('#msj-mensaje').val('');
+              $('#mesgs').html('');
+              $('#mesgs').html(data);
+              $('.msg_history:last-child').focus();
+              $('.msg_history').animate({scrollTop:$('#mesgs').height()+"px"});
+              $('div#loading').addClass('invisible');
+            }
+          });
+          return false;
+  });//$('#btn-mensaje').on("click",function
+
+  function showmsg(){
+      var req = new XMLHttpRequest();
+
+      req.onreadystatechange = function(){
+        if (req.readyState == 4 && req.status == 200) {
+          $('#mesgs').html('');
+          $('#mesgs').html(req.responseText);
+        }
+      }
+      var url='/defensoria/mensajes/msgs/'+ $('#msj-canal').val();
+      req.open('GET', url, true);
+      req.send();
+
+  }//function showms()
+  setInterval(function(){
+    if( $('#msj-canal').val() ){
+     //showmsg()
+    } else {
+      return false
+    }
+
+  }, 4500);
 
         
 

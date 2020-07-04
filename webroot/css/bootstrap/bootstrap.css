@@ -9210,7 +9210,7 @@ background: url(background3.jpg) no-repeat center center fixed !important;
 background-repeat: no-repeat !important;
 background-size: 100% 100% !important; }
 
-@media only screen and (min-width: 0px) and (max-width: 750px) {
+@media only screen and (min-width: 100px) and (max-width: 750px) {
   body {
     background: url('background3-sm.jpg') 50% 80% no-repeat fixed !important;
     background-size: auto !important;
@@ -9255,8 +9255,14 @@ background-size: 100% 100% !important; }
 
 .lgbt, .slimdna{
     width: 50%;
-    height: auto; }
+    height: auto; 
+  }
+  .mesgs {
+    float: left;
+    padding: 30px 15px 0 25px;
+    width: 70%;
 }
+}/* //@media only screen and (min-width: 100px) and (max-width: 750px)*/
 .form-group label{font-size: 15px;}
 #loading img{width: 10%;}
 
@@ -9265,7 +9271,7 @@ background-size: 100% 100% !important; }
 .container{max-width:1170px; margin:auto;}
 img{ max-width:100%;}
 .inbox_people {
-  background: #f8f8f8 none repeat scroll 0 0;
+  background: #fff39e none repeat scroll 0 0;
   float: left;
   overflow: hidden;
   width: 40%; border-right:1px solid #c4c4c4;
@@ -9336,7 +9342,7 @@ img{ max-width:100%;}
   margin-top: 2%;
  }
  .received_withd_msg p {
-  background: #ebebeb none repeat scroll 0 0;
+  background: #ffdc71 none repeat scroll 0 0;
   border-radius: 3px;
   color: #212020;
   font-size: 14px;
@@ -9352,16 +9358,17 @@ img{ max-width:100%;}
 }
 .received_withd_msg { width: 57%;}
 .mesgs {
-  float: left;
+  float: right;
   padding: 30px 15px 0 25px;
-  width: 90%;
+  width: 60%;
 }
 
  .sent_msg p {
-  background: #cecdcd  none repeat scroll 0 0;
+  background: #fdec90 none repeat scroll 0 0;
   border-radius: 3px;
   font-size: 14px;
-  margin: 0; color:#fff;
+  margin: 0; 
+  color:#000;
   padding: 5px 10px 5px 12px;
   width:100%;
 }
@@ -9371,12 +9378,14 @@ img{ max-width:100%;}
   width: 46%;
 }
 .input_msg_write input {
-  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  background: #fff;
   border: medium none;
   color: #4c4c4c;
   font-size: 15px;
   min-height: 48px;
   width: 100%;
+  border: 1px solid #807d7d;
+border-radius: 10%;
 }
 
 .type_msg {border-top: 1px solid #c4c4c4;position: relative;}

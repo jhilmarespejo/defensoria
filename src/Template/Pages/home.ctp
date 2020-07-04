@@ -67,10 +67,13 @@ body, html {
     <link href="https://fonts.googleapis.com/css?family=Raleway:500i|Roboto:300,400,700|Roboto+Mono" rel="stylesheet">
 </head>
 <body class="home">
+    <div class=""><?php echo $this->Html->image('admin.png', ['alt' => 'admin', 'style'=> 'width:4%', 'class' => 'slimdna float-right', 'url' => ['controller' => 'Users', 'action'=>'login'] ]);?></div>
      <div class="foot">    
     <div class="float-right "><span class="h3 txt-shadow-black">SELECCIONE UNA OPCIÓN:   </span></div>
     <br/><br/><br/>
     
+    
+
     <div class="option"><?php echo $this->Html->image('slim.png', ['alt' => 'SlimDNa', 'class' => 'slimdna float-right', 'url' => ['controller' => 'Chat', 'slim'] ]);?></div>
      <div class="option"><?php echo $this->Html->image('dna.png', ['alt' => 'SlimDNa', 'class' => 'slimdna float-right', 'url' => ['controller' => 'Chat', 'dna'] ]);?></div>
     <div class="option"><?php echo $this->Html->image('LGBT.png', ['alt' => 'TLGB', 'class' => 'lgbt float-right', 'url' => ['controller' => 'Chat', 'lgbt'] ]);?></div>

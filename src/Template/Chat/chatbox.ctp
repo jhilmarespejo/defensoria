@@ -69,67 +69,7 @@ if(isset($current_user)){
 <?php endif; ?>
 
 
-<script type="text/javascript">
-	var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
-	$('#btn-mensaje').on("click",function(event){
-          event.preventDefault();
-          var mensaje = {
-            nombres: $('#msj-nombres').val(),
-            de: $('#msj-de').val(),
-            para: $('#msj-para').val(),
-            mensaje: $('#msj-mensaje').val(),
-            plataforma: $('#msj-plataforma').val(),
-            canal: $('#msj-canal').val(),
-          };
 
-          $.ajax({
-            type: "post",
-            url: "/defensoria/Mensajes/add",
-            data: mensaje,
-            headers: {'X-CSRF-Token': csrfToken},
-            beforeSend: function( data )
-            {
-              $('#btn-mensaje').prop( "disabled", true );
-              $('div#loading').removeClass('invisible');
-            },
-            success:  function( data )
-            {
-              $('#btn-mensaje').prop( "disabled", false );
-              $('#msj-mensaje').val('');
-              $('#mesgs').html('');
-              $('#mesgs').html(data);
-              $('.msg_history:last-child').focus();
-              $('.msg_history').animate({scrollTop:$('#mesgs').height()+"px"});
-              $('div#loading').addClass('invisible');
-            }
-          });
-          return false;
-        });
-
-	function showmsg(){
-      var req = new XMLHttpRequest();
-
-      req.onreadystatechange = function(){
-        if (req.readyState == 4 && req.status == 200) {
-          $('#mesgs').html('');
-          $('#mesgs').html(req.responseText);
-        }
-      }
-      var url='/defensoria/mensajes/msgs/'+ $('#msj-canal').val();
-      req.open('GET', url, true);
-      req.send();
-
-    }
-    	// setInterval(function(){
-     //  		if( $('#msj-canal').val() ){
-     //  			showmsg()
-     //  		} else {
-     //  			return false
-     //  		}
-
-    	// }, 4500);
-
-    //linea que hace que se refreseque la pagina cada segundo
 
 
 
