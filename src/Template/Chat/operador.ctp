@@ -57,7 +57,7 @@
           
           $.ajax({
           type: "post",
-          url: "/defensoria/chat/mensajes/"+denunciate_id,
+          url: "/defensoria/Mensajes/msgs/"+denunciate_id,
           data: {de: $('#denunciate-id'+denunciate_id).val()},
           headers: {'X-CSRF-Token': csrfToken},
           beforeSend: function( data )
@@ -77,7 +77,7 @@
           return false;
         });
 
-
+//send messages
   var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
   $('#btn-mensaje').on("click",function(event){
           event.preventDefault();

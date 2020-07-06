@@ -1,0 +1,774 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"men",
+				"mensaje"
+			],
+			[
+				"mens",
+				"mensaje"
+			],
+			[
+				"mEN",
+				"Mensajes"
+			],
+			[
+				"rer",
+				"return"
+			],
+			[
+				"distrit",
+				"distrito"
+			],
+			[
+				"distrito",
+				"Distrito"
+			],
+			[
+				"selec",
+				"selected"
+			],
+			[
+				"is_nu",
+				"is_numeric"
+			],
+			[
+				"fu",
+				"function"
+			],
+			[
+				"strt",
+				"strtoupper"
+			],
+			[
+				"paginato",
+				"Paginator"
+			],
+			[
+				"con",
+				"control"
+			],
+			[
+				"Denun",
+				"Denuncia"
+			],
+			[
+				"agresor_",
+				"agresor_id"
+			],
+			[
+				"victima",
+				"victima_name"
+			],
+			[
+				"VI",
+				"victima_id"
+			],
+			[
+				"not",
+				"notification"
+			],
+			[
+				"this",
+				"this-"
+			],
+			[
+				"bt",
+				"btn-danger"
+			],
+			[
+				"var",
+				"var_dump"
+			],
+			[
+				"val",
+				"value"
+			],
+			[
+				"font-s",
+				"font-size\tproperty"
+			],
+			[
+				"MEnsa",
+				"Mensajes"
+			],
+			[
+				"tex",
+				"text"
+			],
+			[
+				"tue",
+				"true"
+			],
+			[
+				"Denu",
+				"Denunciante"
+			],
+			[
+				"add",
+				"addClass"
+			],
+			[
+				"te",
+				"text"
+			],
+			[
+				"bo",
+				"bottom\tproperty"
+			],
+			[
+				"text",
+				"text-center"
+			],
+			[
+				"flo",
+				"float-righ"
+			],
+			[
+				"dis",
+				"distrito"
+			],
+			[
+				"tr",
+				"true"
+			],
+			[
+				"Intn",
+				"intente"
+			],
+			[
+				"curre",
+				"current_user"
+			],
+			[
+				"th",
+				"this"
+			],
+			[
+				"Us",
+				"Usuarios"
+			],
+			[
+				"po",
+				"pointer"
+			],
+			[
+				"ma",
+				"margin-right\tproperty"
+			],
+			[
+				"col",
+				"color\tproperty"
+			],
+			[
+				"a",
+				"auto\theight"
+			],
+			[
+				"wid",
+				"width\tproperty"
+			],
+			[
+				"vic",
+				"victima_id"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "DenuncianteController.php",
+			"settings":
+			{
+				"buffer_size": 2353,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ChatController.php",
+			"settings":
+			{
+				"buffer_size": 1515,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "<?php\nnamespace App\\Controller;\n\nuse App\\Controller\\AppController;\nuse Cake\\Event\\Event;\nuse Cake\\Network\\Session\\DatabaseSession;\n\n\n/**\n * Victima Controller\n *\n * @property \\App\\Model\\Table\\VictimaTable $Victima\n *\n * @method \\App\\Model\\Entity\\Victima[]|\\Cake\\Datasource\\ResultSetInterface paginate($object = null, array $settings = [])\n */\nclass MensajesController extends AppController\n{\n    public function beforeFilter(Event $event)\n    {\n        parent::beforeFilter($event);   \n        $this->Auth->allow(['add', 'msgs']);\n        if (in_array($this->request->getParam('action'), ['add', 'msgs'])){\n            $this->getEventManager()->off($this->Csrf);\n        }\n    }\n\n\n    /**\n     * add method\n     * receive the id_denunciante, nombre, distrito and message from caht/index \n     * @return \\Cake\\Http\\Response|void\n     */\n    public function add(){\n        $mensaje = $this->Mensajes->newEntity();\n\n        if ($this->request->is('post')) {\n\n            $mensaje = $this->Mensajes->patchEntity($mensaje, $this->request->data);\n            \n                if ($this->Mensajes->save($mensaje)) {\n\n                    if(!isset($_SESSION)) { session_start(); }\n\n\n                    $_SESSION[\"last_msg_id\"] = $mensaje->id;\n                    return $this->redirect(['controller' => 'Mensajes', 'action' => 'msgs', $this->request->data['canal'] ] );\n                } \n        }\n    }\n\n//request for poolAjax\n    public function msgs($canal = null){\n        set_time_limit(60); // Set the appropriate time limit\n        ignore_user_abort(false); // Stop when polling breaks\n        if($canal){\n            $mensaje = $this->Mensajes->newEntity();\n\n\n            \n            while (true) {\n                $mensajes = $this->Mensajes->find( 'all' )->where(['canal' => $canal])->toArray();\n                if( end($mensajes)['id'] <  $_SESSION[\"last_msg_id\"] ){\n                    $this->set('mensajes', $mensajes);\n                    $this->layout = false;\n                    $this->render('/Chat/chatbox');\n                }\n                break;\n                \n            sleep(1);\n            }\n\n            $this->set('mensajes', $mensajes);\n            $this->layout = false;\n            $this->render('/Chat/chatbox');\n\n        }else{\n            exit;\n        }\n    }\n} //end class\n\n\n?>",
+			"file": "MensajesController.php",
+			"file_size": 2394,
+			"file_write_time": 132384683787214920,
+			"settings":
+			{
+				"buffer_size": 2312,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "test1.sublime-project",
+			"settings":
+			{
+				"buffer_size": 73,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/xampp/htdocs/defensoria/src/Template/Chat/chatbox.ctp",
+			"settings":
+			{
+				"buffer_size": 2268,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/xampp/htdocs/defensoria/src/Template/Chat/operador.ctp",
+			"settings":
+			{
+				"buffer_size": 5113,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/xampp/htdocs/defensoria/src/Template/Chat/index.ctp",
+			"settings":
+			{
+				"buffer_size": 6720,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+	],
+	"file_history":
+	[
+		"/C/xampp/htdocs/defensoria/src/Controller/ChatController.php",
+		"/C/xampp/htdocs/defensoria/src/Template/Chat/operador.ctp",
+		"/C/xampp/htdocs/CHATS/php-long-poll/score.js",
+		"/C/xampp/htdocs/CHATS/php-long-poll/score.html",
+		"/C/xampp/htdocs/CHATS/php-long-poll/score.php",
+		"/C/xampp/htdocs/defensoria/webroot/css/bootstrap/bootstrap.css",
+		"/C/xampp/htdocs/defensoria/src/Controller/DenuncianteController.php",
+		"/C/xampp/htdocs/defensoria/src/Controller/UsersController.php",
+		"/C/xampp/htdocs/defensoria/src/Template/Layout/default.ctp",
+		"/C/xampp/htdocs/defensoria/src/Controller/AppController.php",
+		"/C/xampp/htdocs/defensoria/src/Controller/VictimaController.php",
+		"/C/xampp/htdocs/defensoria/vendor/cakephp/cakephp/src/Http/Session.php",
+		"/C/xampp/htdocs/defensoria/src/Template/Chat/index.ctp",
+		"/C/xampp/htdocs/defensoria/src/Template/Denunciante/index.ctp",
+		"/C/xampp/htdocs/defensoria/src/Controller/DenunciaController.php",
+		"/C/xampp/htdocs/defensoria/src/Application.php",
+		"/C/xampp/htdocs/defensoria/src/Template/Mensajes/index.ctp",
+		"/C/xampp/htdocs/defensoria/src/Template/Victima/add.ctp",
+		"/C/xampp/htdocs/defensoria/src/Template/Chat/chatbox.ctp",
+		"/C/xampp/htdocs/defensoria/src/Template/Pages/home.ctp",
+		"/C/xampp/htdocs/defensoria/config/bootstrap.php",
+		"/C/xampp/htdocs/defensoria/tmp/debug_kit.sqlite",
+		"/C/xampp/htdocs/CHATS/PHPWebSocketChat-komplettes/server/websocket_server.php",
+		"/C/xampp/htdocs/CHATS/simple-php-chat-using-websocket/websocket.html",
+		"/C/xampp/htdocs/defensoria/src/Controller/MensajesController.php",
+		"/C/xampp/htdocs/defensoria/src/Template/Denuncia/edit.ctp",
+		"/C/xampp/htdocs/defensoria/src/Template/Denuncia/index.ctp",
+		"/C/xampp/htdocs/defensoria/src/Template/Agresor/view.ctp",
+		"/C/xampp/htdocs/defensoria/src/Template/Agresor/edit.ctp",
+		"/C/xampp/htdocs/defensoria/src/Template/Victima/view.ctp",
+		"/C/xampp/htdocs/defensoria/src/Template/Denuncia/view.ctp",
+		"/C/xampp/htdocs/defensoria/src/Template/Victima/edit.ctp",
+		"/C/xampp/htdocs/defensoria/src/Template/Denuncia/add.ctp",
+		"/C/xampp/htdocs/defensoria/vendor/cakephp/cakephp/src/View/Helper/PaginatorHelper.php",
+		"/C/xampp/htdocs/defensoria/vendor/cakephp/cakephp/src/Datasource/Paginator.php",
+		"/C/xampp/htdocs/defensoria/src/Template/Victima/notification.ctp",
+		"/C/xampp/htdocs/defensoria/src/Controller/AgresorController.php",
+		"/C/xampp/htdocs/defensoria/src/Template/Element/Flash/success.ctp",
+		"/C/xampp/htdocs/defensoria/src/Template/Victima/data.ctp",
+		"/C/xampp/htdocs/defensoria/vendor/chatwebsocket/class.chathandler.php",
+		"/C/xampp/htdocs/defensoria/vendor/chatwebsocket/php-socket.php",
+		"/C/xampp/htdocs/defensoria/src/Model/Table/MensajesTable.php",
+		"/C/xampp/htdocs/defensoria/src/Model/Entity/Agresor.php",
+		"/C/xampp/htdocs/defensoria/webroot/index.php",
+		"/C/xampp/htdocs/defensoria/vendor/cakephp/cakephp/VERSION.txt",
+		"/C/xampp/htdocs/defensoria/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php",
+		"/C/xampp/htdocs/defensoria/vendor/cakephp/cakephp/src/Core/BasePlugin.php",
+		"/C/xampp/htdocs/defensoria/vendor/cakephp/cakephp/src/Core/HttpApplicationInterface.php",
+		"/C/xampp/htdocs/defensoria/vendor/cakephp/cakephp/src/Core/PluginInterface.php",
+		"/C/xampp/htdocs/defensoria/vendor/cakephp/cakephp/src/Http/BaseApplication.php",
+		"/C/xampp/htdocs/defensoria/vendor/cakephp/cakephp/src/Http/MiddlewareQueue.php",
+		"/C/xampp/htdocs/defensoria/config/app.php",
+		"/C/xampp/htdocs/defensoria/src/Controller/PagesController.php",
+		"/C/xampp/htdocs/defensoria/config/routes.php",
+		"/C/xampp/htdocs/defensoria/src/Model/Table/DenuncianteTable.php",
+		"/C/xampp/htdocs/defensoria/src/Model/Entity/Denuncium.php",
+		"/C/xampp/htdocs/defensoria/webroot/php-socket.php",
+		"/C/xampp/htdocs/defensoria/src/Model/Entity/User.php",
+		"/C/xampp/htdocs/defensoria/src/Model/Table/UsersTable.php",
+		"/C/xampp/htdocs/defensoria/src/Template/Users/view.ctp",
+		"/C/xampp/htdocs/defensoria/src/Template/Users/index.ctp",
+		"/C/xampp/htdocs/defensoria/src/Template/Users/edit.ctp",
+		"/C/xampp/htdocs/defensoria/src/Template/Users/add.ctp",
+		"/C/xampp/htdocs/defensoria/src/Template/Users/login.ctp",
+		"/C/Users/Mati/AppData/Local/Temp/users.sql",
+		"/C/xampp/htdocs/defensoria/src/Template/Usuarios/add.ctp",
+		"/C/xampp/htdocs/defensoria/src/Template/Usuarios/index.ctp",
+		"/C/xampp/htdocs/defensoria/src/Controller/UsuariosController.php",
+		"/C/xampp/htdocs/defensoria/src/Model/Table/UsuariosTable.php",
+		"/C/xampp/htdocs/defensoria/src/Template/Usuarios/login.ctp",
+		"/C/xampp/htdocs/defensoria/vendor/cakephp/bake/tests/Fixture/InvitationsFixture.php",
+		"/C/xampp/htdocs/defensoria/vendor/cakephp/cakephp/src/Database/Connection.php",
+		"/C/xampp/htdocs/defensoria/vendor/cakephp/cakephp/src/ORM/Table.php",
+		"/C/xampp/htdocs/defensoria/vendor/cakephp/cakephp/src/ORM/Association/HasMany.php",
+		"/C/xampp/htdocs/defensoria/vendor/cakephp/cakephp/src/Routing/RouteBuilder.php",
+		"/C/xampp/htdocs/defensoria/src/Template/Victima/index.ctp",
+		"/C/xampp/htdocs/defensoria/src/Template/Chat/index.ctp.php",
+		"/C/xampp/htdocs/defensoria/vendor/chatwebsocket/index.php",
+		"/C/xampp/htdocs/CHATS/simple-php-chat-using-websocket/php-socket.php",
+		"/C/xampp/htdocs/chatkeyrun/index.php",
+		"/C/xampp/htdocs/chatkeyrun/chat.php",
+		"/C/xampp/htdocs/chatkeyrun/defines.php",
+		"/C/xampp/htdocs/chatkeyrun/classes/BD.class.php",
+		"/C/xampp/htdocs/chatkeyrun/css/style.css",
+		"/C/xampp/htdocs/chatkeyrun/css/responsive.css",
+		"/C/xampp/htdocs/chatkeyrun/sys/effect.mp3",
+		"/C/xampp/htdocs/defensoria/src/Template/Error/error500.ctp",
+		"/C/xampp/htdocs/defensoria/vendor/cakephp/cakephp/src/Routing/Router.php",
+		"/C/xampp/htdocs/defensoria/src/Controller/indexController.php",
+		"/C/xampp/htdocs/defensoria/src/Template/Index/index.ctp",
+		"/C/xampp/htdocs/defensoria/sql/defensorias.sql",
+		"/C/xampp/htdocs/manitos/config/app.php",
+		"/C/xampp/htdocs/manitos/config/bootstrap.php",
+		"/C/xampp/htdocs/manitos/src/Template/CuadroSignosVitales/add.ctp",
+		"/C/xampp/htdocs/manitos/src/Template/CuadroSignosVitales/indexX.ctp",
+		"/C/xampp/htdocs/manitos/src/Template/CuadroSignosVitales/board_listX.ctp",
+		"/C/xampp/htdocs/manitos/src/Template/Aportes/add.ctp",
+		"/C/xampp/htdocs/manitos/src/Template/Alimentos/saldos.ctp",
+		"/C/xampp/htdocs/manitos/src/Template/Alimentos/reportCombo.ctp",
+		"/C/xampp/htdocs/defensoria/webroot/css/bootstrap/bootstrap.min341.css",
+		"/C/xampp/htdocs/defensoria/webroot/css/bootstrap/bootstrap.min.css",
+		"/C/xampp/htdocs/defensoria/webroot/js/jquery.min.js",
+		"/C/xampp/htdocs/defensoria/webroot/js/bootstrap/bootstrap.min.js",
+		"/C/xampp/htdocs/defensoria/webroot/js/jquery.diyslider.js",
+		"/C/xampp/htdocs/campusMVP-ejemplo_slider_CSS.htm",
+		"/C/xampp/htdocs/slippry/demo/index.html",
+		"/C/xampp/htdocs/defensoria/webroot/js/jquery.diyslider.min.js",
+		"/C/xampp/htdocs/defensoria/src/Model/Table/VictimaTable.php",
+		"/C/xampp/htdocs/defensorias/config/app.php",
+		"/C/xampp/htdocs/defensorias/tests/TestCase/Controller/PagesControllerTest.php",
+		"/C/xampp/htdocs/defensorias/webroot/css/base.css",
+		"/C/xampp/htdocs/defensorias/webroot/css/home.css",
+		"/C/xampp/htdocs/defensorias/webroot/css/style.css",
+		"/C/xampp/htdocs/defensorias/src/Template/Pages/home.ctp",
+		"/C/xampp/htdocs/defensorias/src/Template/Layout/default.ctp",
+		"/C/xampp/htdocs/defensorias/src/Model/Table/VictimaTable.php",
+		"/C/xampp/htdocs/sesu/sesu.sql",
+		"/C/xampp/htdocs/defensorias/defensorias.sql",
+		"/C/Users/Mati/AppData/Local/Temp/denuncia.sql",
+		"/C/xampp/htdocs/sesu/config/app.php",
+		"/C/xampp/htdocs/sesu/webroot/index.php",
+		"/C/xampp/htdocs/cake3/config/bootstrap.php"
+	],
+	"find":
+	{
+		"height": 40.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"resultSet",
+			"mensajes"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"last_id2"
+		],
+		"reverse": false,
+		"show_context": false,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": false
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "DenuncianteController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2353,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1479,
+								1564
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 703.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "ChatController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1515,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1098,
+								1098
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "MensajesController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2312,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1659,
+								1659
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 743.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "test1.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 73,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/C/xampp/htdocs/defensoria/src/Template/Chat/chatbox.ctp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2268,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 722.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/C/xampp/htdocs/defensoria/src/Template/Chat/operador.ctp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5113,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4806,
+								4806
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1577.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/C/xampp/htdocs/defensoria/src/Template/Chat/index.ctp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6720,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3,
+								3
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 40.0
+	},
+	"input":
+	{
+		"height": 39.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "test1.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"OPERA",
+				"src\\Template\\Chat\\operador.ctp"
+			],
+			[
+				"home",
+				"src\\Template\\Pages\\home.ctp"
+			],
+			[
+				"boot",
+				"webroot\\css\\bootstrap\\bootstrap.css"
+			],
+			[
+				"defau",
+				"src\\Template\\Layout\\default.ctp"
+			],
+			[
+				"boots",
+				"webroot\\css\\bootstrap\\bootstrap.css"
+			],
+			[
+				"boo",
+				"webroot\\css\\bootstrap\\bootstrap.css"
+			],
+			[
+				"BOO",
+				"webroot\\css\\bootstrap\\bootstrap.css"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"xdebug":
+		{
+			"hide_conflict": false
+		}
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 244.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

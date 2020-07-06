@@ -6,6 +6,7 @@ use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 use Cake\Core\Configure;
 
+
 /**
  * Victima Controller
  *
@@ -45,16 +46,20 @@ class DenuncianteController extends AppController
             $mensaje = $mensajesTable->newEntity();
              
             //pr($this->request->data);exit();
-            session_start();
+
+            if(!isset($_SESSION)) 
+            { 
+                session_start(); 
+            } 
             $_SESSION["nombres"] = $mensaje->nombres = $this->request->data['nombres'] ;
             $_SESSION["para"] = $mensaje->de = 'Distrito '.$this->request->data['distrito'] ;
             $_SESSION["de"] = $mensaje->para = $denunciante->id ;
-            $mensaje->mensaje = 'Bien venido '.$this->request->data['nombres'].'. ¿En que podemos ayudarle?' ;
+            $mensaje->mensaje = 'Bien venid@ '.$this->request->data['nombres'].'. ¿En que podemos ayudarle?' ;
             $_SESSION["plataforma"] = $mensaje->plataforma = $this->request->data['plataforma'] ;     
             $_SESSION["canal"] = $mensaje->canal = $denunciante->id ;
+
             if ($mensajesTable->save($mensaje)) {
-                
-                return $this->redirect(['controller' => 'Chat', 'action' => 'mensajes', $denunciante->id]);
+                return $this->redirect(['controller' => 'Mensajes', 'action' => 'msgs', $denunciante->id]);
             }    
 
         

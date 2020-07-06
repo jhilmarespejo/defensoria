@@ -2,7 +2,7 @@
 // echo($denunciante_id);
 // echo($nombres);
 // echo($distrito);
-// echo($plaforma);
+// echo($_SESSION["last_msg_id"]);
 if(isset($current_user)){
 	//datos para el operador, from Mensagescontroller add
 	
@@ -67,12 +67,6 @@ if(isset($current_user)){
 	</div> -->
 	
 <?php endif; ?>
-
-
-
-
-
-
 </script>
 
 

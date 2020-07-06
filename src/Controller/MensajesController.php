@@ -3,6 +3,8 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
+use Cake\Network\Session\DatabaseSession;
+
 
 /**
  * Victima Controller
@@ -34,38 +36,37 @@ class MensajesController extends AppController
         if ($this->request->is('post')) {
 
             $mensaje = $this->Mensajes->patchEntity($mensaje, $this->request->data);
-           
-            if ($this->Mensajes->save($mensaje)) {
-
-                return $this->redirect(['controller' => 'Chat', 'action' => 'mensajes', $this->request->data['canal'] ] );
-
-                // $mensajes = $this->Mensajes->find( 'all' )->where('canal' => $this->request->data['para'] ] ])->toArray();
-                // $this->set('mensajes', $mensajes);
-                // $this->render('/Chat/chatbox');
             
-            } 
+                if ($this->Mensajes->save($mensaje)) {
+
+                    if(!isset($_SESSION)) { session_start(); }
+
+
+                    $_SESSION["last_msg_id"] = $mensaje->id;
+                    return $this->redirect(['controller' => 'Mensajes', 'action' => 'msgs', $this->request->data['canal'] ] );
+                } else {exit;}
+
         }
     }
 
 //request for poolAjax
-    public function msgs($canal =null){
+    public function msgs($canal = null){
+        set_time_limit(60); // Set the appropriate time limit
+        ignore_user_abort(false); // Stop when polling breaks
+
         if($canal){
             $mensaje = $this->Mensajes->newEntity();
 
-            $mensajes = $this->Mensajes->find( 'all' )->where(['canal' => $canal])->toArray();
-            $this->set('mensajes', $mensajes);
-            $this->layout = false;
-            $this->render('/Chat/chatbox');
+                $mensajes = $this->Mensajes->find( 'all' )->where(['canal' => $canal])->toArray();
+                $this->set('mensajes', $mensajes);
+                $this->layout = false;
+                $this->render('/Chat/chatbox');
 
         }else{
             exit;
         }
     }
-
-
-
-
-}
+} //end class
 
 
 ?>

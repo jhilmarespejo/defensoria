@@ -18,7 +18,6 @@ class ChatController extends AppController
         parent::beforeFilter($event);   
         $this->Auth->allow(['index', 'mensajes']);
 
-
         if (in_array($this->request->getParam('action'), ['mensajes', 'operador'])){
             $this->getEventManager()->off($this->Csrf);
         }
@@ -37,34 +36,17 @@ class ChatController extends AppController
             $this->redirect('/');
         }
     }
-/* deliver list of users online */
+/* deliver list of users online for operator*/
     public function operador()
     {
         $distrito = 'Distrito '.$this->Auth->user('district');
+        $plataforma = $this->Auth->user('plataforma');
 
         $this->LoadModel('Mensajes');
         //$mensajes=$this->Mensajes->find('all', ['conditions' => ['para'=> $distrito ]] )-->toArray();
-        $denunciantes = $this->Mensajes->find()->select(['de', 'nombres','fechahora'])->where(['para' => $distrito])->group(['de'])->toArray();
+        $denunciantes = $this->Mensajes->find()->select(['de', 'nombres','fechahora'])->where(['para' => $distrito, 'plataforma' => $plataforma])->group(['de'])->toArray();
             $this->set('denunciantes', $denunciantes);
     }
-
-
-/*deliver messages from each user to operador*/
-    public function mensajes($canal=null){
-
-        if($canal){
-
-        $this->LoadModel('Mensajes');
-        
-        $mensajes = $this->Mensajes->find( 'all' )->where(['canal' => $canal])->toArray();
-
-            $this->set('mensajes', $mensajes);
-            $this->render('/Chat/chatbox');
-
-        } else {exit;}
-
-    }
-
 
 }
 
