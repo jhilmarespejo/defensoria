@@ -1,0 +1,2 @@
+{"nombres":"patricia","de":"356","para":"Distrito 1","mensaje":"hola xxx asdmkf owfnon ofj onrgo ","plataforma":"slim","canal":"356","fechahora":1594149593}
+{"nombres":"patricia","de":"356","para":"Distrito 1","mensaje":"hola paty a","plataforma":"slim","canal":"356","fechahora":1594149658}

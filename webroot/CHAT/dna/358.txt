@@ -1,0 +1,4 @@
+{"nombres":"ricardo","de":"358","para":"Distrito 1","mensaje":"hola1","plataforma":"dna","canal":"358","fechahora":1594177497}
+{"nombres":"ricardo","de":"358","para":"Distrito 1","mensaje":"hola2","plataforma":"dna","canal":"358","fechahora":1594177511}
+{"nombres":"dnad1","de":"Distrito 1","para":"358","mensaje":"hola ricardo","plataforma":"dna","canal":"358","fechahora":1594177588}
+{"nombres":"ricardo","de":"358","para":"Distrito 1","mensaje":".","plataforma":"dna","canal":"358","fechahora":1594177599}

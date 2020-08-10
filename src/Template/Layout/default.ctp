@@ -18,7 +18,11 @@ $cakeDescription ='.:Defensoria - GAMEA:.';
 <html>
 <head>
     <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <meta name="description" content="chat Defensoria y Slim">
+        <meta name="keywords" content="defensoria, slim, ayuda, Al Alto">
+        <meta name="author" content="GAMEA">
     <title>
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
@@ -30,6 +34,8 @@ $cakeDescription ='.:Defensoria - GAMEA:.';
         echo $this->Html->css('bootstrap/bootstrap.css'); 
         echo $this->Html->script('jquery.min.js');
         echo $this->Html->script('bootstrap/bootstrap.min.js');
+        echo $this->Html->script('bootstrap/bootstrap.bundle.min.js');
+
     ?>
 
     <?= $this->fetch('meta') ?>
@@ -64,7 +70,7 @@ $cakeDescription ='.:Defensoria - GAMEA:.';
             <?php endif; ?>
             <div class="col-xs-05 col-sm-05 col-md-05 col-lg-05 ">
             </div>
-            <div class="board col-xs-8 col-sm-8 col-md-8 col-lg-8">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
                 
                 <div class="text-center invisible" id="loading">
                     <?php echo $this->Html->image('loading7.gif');?><br>

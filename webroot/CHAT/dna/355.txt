@@ -1,0 +1,5 @@
+{"nombres":"saul","de":"355","para":"Distrito 1","mensaje":"hola1","plataforma":"dna","canal":"355","fechahora":1594149407}
+{"nombres":"dnad1","de":"Distrito 1","para":"355","mensaje":"hola saul","plataforma":"dna","canal":"355","fechahora":1594149518}
+{"nombres":"saul","de":"355","para":"Distrito 1","mensaje":"hola2","plataforma":"dna","canal":"355","fechahora":1594149527}
+{"nombres":"dnad1","de":"Distrito 1","para":"355","mensaje":"hola saul 2 mcmcj oqedohwdo ow hwfouhn own","plataforma":"dna","canal":"355","fechahora":1594152490}
+{"nombres":"dnad1","de":"Distrito 1","para":"355","mensaje":"hola saul 2 zzzz","plataforma":"dna","canal":"355","fechahora":1594152490}

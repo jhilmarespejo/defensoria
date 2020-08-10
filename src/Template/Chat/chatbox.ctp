@@ -22,6 +22,9 @@ if(isset($current_user)){
 				
 				<div class="outgoing_msg">
 					<div class="sent_msg">
+						<div style="width: 20%;display:inline-flex;" > <?php echo $this->Html->image('mariposa.png'); ?>
+							<span class="time_date"><?php echo $mensaje->plataforma.'-'.$mensaje->de; ?></span>
+						</div></br>
 						<p><?php echo $mensaje->mensaje; ?>
 						<span class="time_date"> <?php echo date_format($mensaje->fechahora, 'Y-M-d H:i'); ?></span> 
 						</p>

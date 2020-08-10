@@ -39,7 +39,7 @@ class DenuncianteController extends AppController
         
         if ($this->Denunciante->save($denunciante)) {
             
-            $this->set(['denunciante_id'=>$denunciante->id, 'nombres'=>$this->request->data['nombres'],'distrito'=>$this->request->data['distrito'], 'plataforma'=>$this->request->data['plataforma'] ]);
+            // $this->set(['denunciante_id'=>$denunciante->id, 'nombres'=>$this->request->data['nombres'],'distrito'=>$this->request->data['distrito'], 'plataforma'=>$this->request->data['plataforma'] ]);
             
             /* a welcome message is generated */
             $mensajesTable = TableRegistry::get('Mensajes');
@@ -47,20 +47,38 @@ class DenuncianteController extends AppController
              
             //pr($this->request->data);exit();
 
-            if(!isset($_SESSION)) 
-            { 
-                session_start(); 
-            } 
-            $_SESSION["nombres"] = $mensaje->nombres = $this->request->data['nombres'] ;
-            $_SESSION["para"] = $mensaje->de = 'Distrito '.$this->request->data['distrito'] ;
-            $_SESSION["de"] = $mensaje->para = $denunciante->id ;
-            $mensaje->mensaje = 'Bien venid@ '.$this->request->data['nombres'].'. ¿En que podemos ayudarle?' ;
-            $_SESSION["plataforma"] = $mensaje->plataforma = $this->request->data['plataforma'] ;     
-            $_SESSION["canal"] = $mensaje->canal = $denunciante->id ;
+            // if(!isset($_SESSION)) 
+            // { 
+            //     session_start(); 
+            // }
+
+            /*$_SESSION["nombres"] =*/ $mensaje->nombres = $this->request->data['nombres'] ;
+            /*$_SESSION["para"] =*/ $mensaje->de = 'Distrito '.$this->request->data['distrito'] ;
+            /*$_SESSION["de"] =*/ $mensaje->para = $denunciante->id ;
+            $mensaje->mensaje = 'Bien venid@ '.$this->request->data['nombres'] ;
+            /*$_SESSION["plataforma"] =*/ $mensaje->plataforma = $this->request->data['plataforma'] ;     
+            /*$_SESSION["canal"] =*/ $mensaje->canal = $denunciante->id ;
+
+            // if ($mensajesTable->save($mensaje)) {
+            //     return $this->redirect(['controller' => 'Mensajes', 'action' => 'msgs', $denunciante->id]);
+            // } 
+
+            $this->LoadModel('Users');
+            $officer= $this->Users->find('all' )->where(['plataforma' => $this->request->data['plataforma'], 'district' => $this->request->data['distrito']])->toArray();
 
             if ($mensajesTable->save($mensaje)) {
-                return $this->redirect(['controller' => 'Mensajes', 'action' => 'msgs', $denunciante->id]);
-            }    
+                $this->set('celular', $officer['0']['celular']);
+                $this->layout = false;
+                $this->render(false);
+            }
+            // pr('api.whatsapp.com/send?phone=591'.$officer['0']['celular'].'&text=Hola,¿podría_ayudarme?');
+            // $this->render('api.whatsapp.com/send?phone=591'.$officer['0']['celular'].'&text=Hola,¿podría_ayudarme?');
+            
+
+            // exit;
+
+
+             
 
         
         } 

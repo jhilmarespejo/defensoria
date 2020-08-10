@@ -1,0 +1,3 @@
+{"nombres":"fernando","de":"354","para":"Distrito 1","mensaje":"hola1","plataforma":"lgbt","canal":"354","fechahora":1594149323}
+{"nombres":"fernando","de":"354","para":"Distrito 1","mensaje":"hola2","plataforma":"lgbt","canal":"354","fechahora":1594149344}
+{"nombres":"fernando","de":"354","para":"Distrito 1","mensaje":"hola3","plataforma":"lgbt","canal":"354","fechahora":1594149352}

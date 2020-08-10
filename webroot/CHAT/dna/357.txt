@@ -1,0 +1,1 @@
+{"nombres":"fernando","de":"357","para":"Distrito 1","mensaje":"hola 1","plataforma":"dna","canal":"357","fechahora":1594177317}

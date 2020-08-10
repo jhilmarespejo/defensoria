@@ -40,6 +40,7 @@
           <div class="input_msg_write">
             <?php echo $this->Form->input('mensaje', ['label' => false,'id'=>'msj-mensaje', 'class'=>'write_msg', 'placeholder'=>'Escriba el mensaje', 'type' => 'text', 'value'=>'']);?>
             <?php echo $this->Html->image('plane.png', ['alt' => '', 'id'=>'btn-mensaje', 'class' => 'plane msg_send_btn', 'url' => ['' => 'Chat', ''] ]);?>
+            <?php echo $this->Html->image('send.gif', ['alt' => '', 'id'=>'gif-send', 'style' => 'position:absolute;width:30%;right:0', 'class' => 'invisible' ]);?>
           </div> 
         </div>
 
@@ -97,6 +98,8 @@
             headers: {'X-CSRF-Token': csrfToken},
             beforeSend: function( data )
             {
+              $('.msg_send_btn').addClass('invisible');
+              $('#gif-send').removeClass('invisible');
               $('#btn-mensaje').prop( "disabled", true );
               $('div#loading').removeClass('invisible');
               if($('#msj-mensaje').val()==''){
@@ -116,6 +119,8 @@
               $('.msg_history:last-child').focus();
               $('.msg_history').animate({scrollTop:$('#mesgs').height()+"px"});
               $('div#loading').addClass('invisible');
+              $('.msg_send_btn').removeClass('invisible');
+              $('#gif-send').addClass('invisible');
             }
           });
           return false;

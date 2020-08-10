@@ -16,7 +16,7 @@ class ChatController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);   
-        $this->Auth->allow(['index', 'mensajes']);
+        $this->Auth->allow(['index', 'mensajes', 'findnumber']);
 
         if (in_array($this->request->getParam('action'), ['mensajes', 'operador'])){
             $this->getEventManager()->off($this->Csrf);
@@ -36,6 +36,25 @@ class ChatController extends AppController
             $this->redirect('/');
         }
     }
+
+    public function findnumber()
+    {
+        if ($this->request->is('post')) {
+
+           $this->LoadModel('Users');
+            $officer= $this->Users->find()->select(['id', 'names','surnames', 'district', 'plataforma', 'celular', 'corporativo'])->where(['plataforma' => $this->request->data['plataforma'], 'district' => $this->request->data['distrito']])->toArray();
+
+               // pr($officer);
+               // exit;
+            $this->set('officer', $officer['0']);
+            $this->layout = false;
+            $this->render('/Chat/chatwapp');
+        }
+        
+        //$this->set(compact('denuncium', 'victima', 'agresor'));
+    }
+
+
 /* deliver list of users online for operator*/
     public function operador()
     {
